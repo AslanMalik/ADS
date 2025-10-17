@@ -2,21 +2,17 @@
 #include <queue>
 using namespace std;
 
-
-
 const int N = 200000 + 5;
 int L[N], R[N], dep[N], cnt[N];
 
-
-
 int main() {
-
     int n; cin >> n;
 
     for (int i = 1; i <= n; i++)
     {
         L[i] = R[i] = 0;
     }
+
 
     for (int i = 0; i < n-1; i++)
     {
@@ -31,15 +27,13 @@ int main() {
             R[x] = y;
         }
     }
-    
 
     queue<int> q;
     q.push(1);
-    int mx = 1;
     dep[1] = 1;
+    int mx = 1;
 
-
-    while (!q.empty())
+    while(!q.empty())
     {
         int u = q.front(); q.pop();
         mx = max(mx, dep[u]);
@@ -47,33 +41,28 @@ int main() {
 
         if (L[u])
         {
-            dep[L[u]] = dep[u] + 1; q.push(L[u]);
+            dep[L[u]] = 1 + dep[u]; q.push(L[u]);
         }
 
         if (R[u])
         {
-            dep[R[u]] = dep[u] + 1; q.push(R[u]);
+            dep[R[u]] = 1 + dep[u]; q.push(R[u]);
         }
-
     }
 
-    int max_elemet = 0;
+    int max_element = 0;
 
     for (int i = 1; i <= mx; i++)
     {
-        max_elemet = max(max_elemet, cnt[i]);
+        max_element = max(max_element, cnt[i]);
     }
 
+    cout << max_element;
 
-    cout << max_elemet;
+
     
     
     
-
-
-
-
-
 
     return 0;
 }
